@@ -1,21 +1,21 @@
-# 📇 Agenda de Contatos - Versão V.0.1.0
+# 📇 Agenda de Contatos - Versão V.0.2.0
 
-> Segunda etapa do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
+> Terceira etapa do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
 
 ---
 
 ## 📌 Visão Geral
-Esta versão evolui a estrutura da aplicação permitindo o armazenamento de múltiplos contatos por meio de **arrays (vetores)** de tamanho fixo com capacidade para até 5 registros[cite: 1].
+Esta versão substitui os arrays de capacidade fixa por **coleções dinâmicas** (`List` e `ArrayList`), permitindo armazenar uma quantidade ilimitada de contatos sem a necessidade de predefinir tamanho.
 
 ## 🛠️ Tecnologias e Conceitos Aplicados
-* **Arrays Unidimensionais:** Uso de `String[]` para gerenciar listas de nomes, celulares e e-mails vinculados pelo mesmo índice[cite: 1].
-* **Controle de Posição:** Utilização de um contador (`quantidade`) para indicar a quantidade de cadastros e o próximo índice livre[cite: 1].
-* **Laço `for`:** Percorrimento de vetores para listagem, busca por nome e reorganização de elementos[cite: 1].
-* **Algoritmo de Exclusão:** Deslocamento de elementos à esquerda (*shift*) para eliminar "buracos" no array após remoções[cite: 1].
-* **Tratamento de Limite:** Verificação de capacidade máxima para evitar exceção de estouro de array (`ArrayIndexOutOfBoundsException`)[cite: 1].
+* **Coleções Java:** Uso de `List<String>` e `ArrayList<>` para manipulação dinâmica de dados.
+* **Inserção Dinâmica:** Substituição do índice manual por `nomes.add()`.
+* **Acesso e Tamanho:** Uso de `nomes.get(i)` para leitura de elementos e `nomes.size()` para obter o tamanho real da coleção.
+* **Remoção Automática:** Uso de `nomes.remove(i)`, eliminando a necessidade de deslocamento manual de elementos (*shift*).
+* **Simplificação de Código:** Remoção do contador manual (`quantidade`/`cont`) e do teste de agenda cheia.
 
 ## ⚠️ Limitações da Versão
-* **Tamanho Fixo:** O número máximo de contatos precisa ser predefinido na inicialização do sistema[cite: 1].
+* **Listas Paralelas:** Dados como nome, celular e e-mail continuam armazenados em listas separadas conectadas apenas pelo mesmo índice.
 
 ---
 *Desenvolvido como projeto prático no IFCE Campus Maranguape.*
