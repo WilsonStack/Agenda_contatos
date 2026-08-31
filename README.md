@@ -1,21 +1,23 @@
-# 📇 Agenda de Contatos - Versão V.0.2.0
+# 📇 Agenda de Contatos - Versão V.0.3.0
 
-> Terceira etapa do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
+> Quarta etapa do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
 
 ---
 
 ## 📌 Visão Geral
-Esta versão substitui os arrays de capacidade fixa por **coleções dinâmicas** (`List` e `ArrayList`), permitindo armazenar uma quantidade ilimitada de contatos sem a necessidade de predefinir tamanho.
+Esta versão acrescenta a funcionalidade de **Alterar Contato**, finalizando a implementação de todas as operações básicas de um **CRUD** (Create, Read, Update, Delete) em listas dinâmicas.
 
 ## 🛠️ Tecnologias e Conceitos Aplicados
-* **Coleções Java:** Uso de `List<String>` e `ArrayList<>` para manipulação dinâmica de dados.
-* **Inserção Dinâmica:** Substituição do índice manual por `nomes.add()`.
-* **Acesso e Tamanho:** Uso de `nomes.get(i)` para leitura de elementos e `nomes.size()` para obter o tamanho real da coleção.
-* **Remoção Automática:** Uso de `nomes.remove(i)`, eliminando a necessidade de deslocamento manual de elementos (*shift*).
-* **Simplificação de Código:** Remoção do contador manual (`quantidade`/`cont`) e do teste de agenda cheia.
+* **Operação de Atualização (`set()`):** Substituição de elementos existentes em determinada posição do `ArrayList`.
+* **Fluxo de Atualização:** Busca da posição (`índice`) do elemento, validação e aplicação das alterações mantendo as listas sincronizadas.
+* **CRUD Completo:**
+    * **C**reate: `add()`
+    * **R**ead: `get()` e `size()`
+    * **U**pdate: `set()`
+    * **D**elete: `remove()`
 
 ## ⚠️ Limitações da Versão
-* **Listas Paralelas:** Dados como nome, celular e e-mail continuam armazenados em listas separadas conectadas apenas pelo mesmo índice.
+* **Listas Paralelas:** As informações ainda dependem do sincronismo entre três coleções distintas.
 
 ---
 *Desenvolvido como projeto prático no IFCE Campus Maranguape.*
