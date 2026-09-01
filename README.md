@@ -51,7 +51,7 @@ Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estrut
 | **V.0.0.0** | Variáveis simples | `String`, `Scanner`, `if-else`, `switch`, `while` |
 | **V.0.1.0** | Arrays | Vetores, índices, `for`, capacidade fixa |
 | **V.0.2.0** | `List` + `ArrayList` | Coleções dinâmicas, `add()`, `get()`, `remove()`, `size()` |
-| **V.0.3.0** ✅ | `List` + `ArrayList` | Alteração com `set()` e CRUD completo |
+| **V.0.3.0** ✅ (atual) | `List` + `ArrayList` | Alteração com `set()` e CRUD completo |
 
 ---
 
