@@ -1,38 +1,47 @@
-# 🗂️ Agenda de Contatos - Versão V1.1.0
+# 🗂️ Agenda de Contatos - Versão V1.1.1
 
-> Sexta etapa (Refatoração Arquitetural e Orientação a Objetos) do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
+> Sétima etapa (Versão de Correção de Bugs e Ajustes de Interface) do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
 
 ---
 
 ## 📌 Visão Geral
 
-Esta versão marca a transição da arquitetura procedural para os **conceitos fundamentais da Programação Orientada a Objetos (POO)**. O código foi totalmente refatorado e dividido em **múltiplas classes com responsabilidades bem definidas** (Separação de Conceitos / *Separation of Concerns*).
-
-Diferente das versões anteriores em que toda a lógica e os dados residiam estaticamente na classe `Principal`, a versão **V1.1.0** encapsula o estado e as operações do sistema na classe `Agenda` e isola os métodos de interface/utilitários na classe `Uteis`.
+Esta versão **V1.1.1** é uma atualização focada em **correção de bugs (bugfix)** e melhorias na experiência de uso. O objetivo principal foi corrigir o problema no fluxo de encerramento do programa, além de adicionar a funcionalidade de informações sobre o sistema através de uma interface gráfica simples (`JOptionPane`).
 
 ---
 
-## 🔄 O que Mudou na Versão V1.1.0?
+## 🔄 O que Mudou na Versão V1.1.1?
 
-* 🏗️ **Divisão de Responsabilidades em Classes:**
-  * **`Agenda.java`:** Agora é responsável por gerenciar a regra de negócio e os dados dos contatos (`nomes`, `celulares`, `emails`). As operações do CRUD deixaram de ser estáticas e passaram a ser métodos de instância.
-  * **`Uteis.java`:** Classe dedicada exclusivamente a funções utilitárias da interface de usuário em console (`mostraInicializacao()`, `mostraMenu()`, `selecionaOpcao()`, `sair()`).
-  * **`Principal.java`:** Teve seu tamanho drasticamente reduzido, atuando apenas como ponto de entrada (`main`), instanciando o objeto `Agenda` e controlando o fluxo do menu.
-* 📦 **Encapsulamento de Atributos:**
-  * Os atributos de dados (`nomes`, `celulares`, `emails`) na classe `Agenda` passaram a ser **privados** (`private`), impedindo o acesso direto e não autorizado por outras partes do código.
-* 🧼 **Passagem de Parâmetros Simplificada:**
-  * Não é mais necessário passar as três listas (`nomes`, `celulares`, `emails`) como parâmetros em cada chamada de método, pois os métodos da classe `Agenda` acessam diretamente seus próprios atributos de instância.
+* 🐛 **Correção do Bug na Opção de Sair (`sair()`):**
+  * Na versão anterior, a opção 6 exibia uma mensagem informando que a opção não estava disponível e retornava `true`, mantendo o usuário preso no loop do programa.
+  * Agora, o método `sair()` na classe `Uteis` exibe a mensagem `"Saindo da Agenda de Contatos..."` e retorna `false`, encerrando o loop `while` corretamente e finalizando a aplicação.
+* ℹ️ **Nova Opção "Sobre" (Opção 7):**
+  * Adicionado a opção **7 - Informações Sobre a Agenda de Contatos** no menu principal.
+  * Implementado o método `sobre()` na classe `Uteis`, que utiliza a biblioteca `javax.swing.JOptionPane` para exibir uma caixa de diálogo gráfica com a informação de autoria do sistema.
+* 🛠️ **Ajustes nos Métodos da Classe `Agenda`:**
+  * Os métodos da classe `Agenda` foram definidos de forma estática (`public static`), recebendo as listas (`nomes`, `celulares`, `emails`) e o `Scanner` diretamente por parâmetro.
+  * Atualização da mensagem do cabeçalho inicial para **v1.1.1**.
 
 ---
 
 ## 🛠️ Tecnologias e Conceitos Aplicados
 
-* **Orientação a Objetos (POO):**
-  * **Instanciação de Objetos:** Uso do operador `new` para criar o objeto `Agenda` na classe `Principal`.
-  * **Encapsulamento:** Uso do modificador de acesso `private` para proteger as coleções de dados na classe `Agenda`.
-  * **Métodos de Instância vs. Métodos Estáticos:** Separação entre comportamento de objeto (`Agenda`) e funções utilitárias auxiliares (`Uteis`).
-* **Estrutura Multiclasse:** Organização modular do código distribuído em três arquivos Java dentro do pacote `br.edu.principal`.
-* **Fluxo de Leitura Aprimorado:** Correção no consumo do caractere de quebra de linha (`sc.nextLine()`) após a leitura numérica no método `selecionaOpcao()`.
+* **Linguagem Java SE:** Organização do código dividida entre as classes `Principal`, `Agenda` e `Uteis` no pacote `br.edu.principal`.
+* **Interface Gráfica Swing (`JOptionPane`):** Uso do método `showMessageDialog()` para exibição de mensagens popup em janela gráfica.
+* **Controle de Fluxo e Loops:** Controle de encerramento do loop principal `while (continuar)` através do retorno booleano do método `Uteis.sair()`.
+* **Estrutura de Dados:** Manipulação de listas dinâmicas (`List<String>`) repassadas por parâmetro aos métodos utilitários do CRUD.
+
+---
+
+## 📋 Funcionalidades do Menu
+
+1. **Adicionar Contato:** Cadastra nome, celular e e-mail.
+2. **Listar Contatos:** Exibe todos os contatos da agenda.
+3. **Procurar Contato:** Busca contato pelo nome.
+4. **Alterar Contato:** Atualiza os dados de um contato existente.
+5. **Excluir Contato:** Remove o contato da agenda.
+6. **Sair:** Encerra a aplicação corretamente (bug corrigido nesta versão).
+7. **Informações Sobre a Agenda de Contatos:** Exibe uma janela popup gráfica com informações sobre o projeto e autoria.
 
 ---
 
@@ -43,28 +52,21 @@ src/
 └── br/
     └── edu/
         └── principal/
-            ├── Agenda.java     # Gerenciamento de dados e regras do CRUD
-            ├── Principal.java  # Ponto de entrada (main) e loop de execução
-            └── Uteis.java      # Utilitários de interface e exibição de menu
+            ├── Agenda.java     # Métodos do CRUD (adicionar, listar, pesquisar, atualizar, excluir)
+            ├── Principal.java  # Classe principal com o método main e controle de fluxo
+            └── Uteis.java      # Utilitários de tela, tratamento de saída e exibição do popup "Sobre"
 ```
-
----
-
-## ⚠️ Limitações da Versão
-
-* **Estrutura Interna de Listas Paralelas:** Embora os dados estejam encapsulados na classe `Agenda`, eles ainda utilizam três listas separadas (`List<String>`) para representar cada contato, em vez de um objeto `Contato` dedicado.
-* **Armazenamento Volátil:** Os dados continuam sendo mantidos exclusivamente em memória RAM.
 
 ---
 
 ## 🔧 Como Executar
 
-1. **Compilar todas as classes do pacote:**
+1. **Compilar todas as classes:**
    ```bash
    javac br/edu/principal/*.java
    ```
 
-2. **Executar a aplicação a partir do ponto de entrada:**
+2. **Executar a aplicação:**
    ```bash
    java br.edu.principal.Principal
    ```

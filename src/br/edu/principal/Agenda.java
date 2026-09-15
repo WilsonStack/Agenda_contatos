@@ -1,16 +1,15 @@
 package br.edu.principal;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Agenda {
 
-    private List<String> nomes = new ArrayList<>();
-    private List<String> celulares = new ArrayList<>();
-    private List<String> emails = new ArrayList<>();
-
-    public void adicionar(Scanner sc) {
+    public static void adicionar(
+            Scanner sc,
+            List<String> nomes,
+            List<String> celulares,
+            List<String> emails) {
         System.out.println("=== ADICIONAR CONTATO ===");
         System.out.print("Digite o nome: ");
         String nome = sc.nextLine();
@@ -26,12 +25,17 @@ public class Agenda {
         System.out.println("Contato adicionado com sucesso!");
     }
 
-    public void listar() {
+    public static void listar(
+            List<String> nomes,
+            List<String> celulares,
+            List<String> emails) {
         System.out.println("=== LISTAR CONTATOS ===");
-        if (nomes.isEmpty()) {
+        if (nomes.size() == 0) {
             System.out.println("Nenhum contato cadastrado!");
+
         } else {
             for (int i = 0; i < nomes.size(); i++) {
+
                 System.out.println("--------------------------");
                 System.out.println("Nome: " + nomes.get(i));
                 System.out.println("Celular: " + celulares.get(i));
@@ -40,7 +44,11 @@ public class Agenda {
         }
     }
 
-    public void pesquisar(Scanner sc) {
+    public static void pesquisar(
+            Scanner sc,
+            List<String> nomes,
+            List<String> celulares,
+            List<String> emails) {
         System.out.println("=== PROCURAR CONTATO ===");
         System.out.print("Digite o nome do contato: ");
         String nomeBusca = sc.nextLine();
@@ -53,6 +61,7 @@ public class Agenda {
                 System.out.println("Nome: " + nomes.get(i));
                 System.out.println("Celular: " + celulares.get(i));
                 System.out.println("Email: " + emails.get(i));
+
                 encontrado = true;
             }
         }
@@ -61,7 +70,11 @@ public class Agenda {
         }
     }
 
-    public void atualizar(Scanner sc) {
+    public static void atualizar(
+            Scanner sc,
+            List<String> nomes,
+            List<String> celulares,
+            List<String> emails) {
         System.out.println("=== ALTERAR CONTATO ===");
         System.out.print("Digite o nome do contato: ");
         String nomeProcurado = sc.nextLine();
@@ -72,8 +85,8 @@ public class Agenda {
                 posicao = i;
             }
         }
-
         if (posicao != -1) {
+
             System.out.print("Digite o novo nome: ");
             String novoNome = sc.nextLine();
 
@@ -93,7 +106,11 @@ public class Agenda {
         }
     }
 
-    public void excluir(Scanner sc) {
+    public static void excluir(
+            Scanner sc,
+            List<String> nomes,
+            List<String> celulares,
+            List<String> emails) {
         System.out.println("=== EXCLUIR CONTATO ===");
         System.out.print("Digite o nome do contato: ");
         String nomeExcluir = sc.nextLine();
@@ -107,6 +124,7 @@ public class Agenda {
                 emails.remove(i);
 
                 excluido = true;
+
                 System.out.println("Contato excluído com sucesso!");
                 break;
             }
@@ -115,4 +133,5 @@ public class Agenda {
             System.out.println("Contato não encontrado!");
         }
     }
+
 }

@@ -2,12 +2,13 @@ package br.edu.principal;
 
 import java.util.Scanner;
 
-public class Uteis {
+import javax.swing.JOptionPane;
 
+public class Uteis {
     public static void mostraInicializacao() {
         System.out.println("==========================");
         System.out.println("     AGENDA DE CONTATOS    ");
-        System.out.println("           v1.1.0          ");
+        System.out.println("          v1.1.1           ");
         System.out.println("==========================");
         System.out.println("Bem-vindo!");
     }
@@ -20,17 +21,31 @@ public class Uteis {
         System.out.println("4 - Alterar contato");
         System.out.println("5 - Excluir contato");
         System.out.println("6 - Sair");
+        System.out.println("7 - Informações Sobre a Agenda de Contatos");
     }
 
     public static int selecionaOpcao(Scanner sc) {
         System.out.print("Escolha uma opção: ");
         int opc = sc.nextInt();
-        sc.nextLine(); // Limpa o buffer do scanner
+        sc.nextLine();
         return opc;
     }
 
     public static boolean sair() {
-        System.out.println("A opção de sair ainda não está disponível na versão 1.0.0!");
-        return true; // Retorna true para continuar no loop do programa
+        System.out.println("Saindo da Agenda de Contatos...");
+        return false;
+    }
+
+    public static void sobre() {
+        JOptionPane.showMessageDialog(null,
+                "Desenvolvido por Wilson!");
     }
 }
+
+
+
+
+
+
+
+
