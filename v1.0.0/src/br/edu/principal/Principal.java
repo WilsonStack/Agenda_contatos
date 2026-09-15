@@ -37,7 +37,7 @@ public class Principal {
     public static void mostraInicializacao() {
         System.out.println("==========================");
         System.out.println("     AGENDA DE CONTATOS    ");
-        System.out.println("           v1.0.0          ");
+        System.out.println("           v1.1.0          ");
         System.out.println("==========================");
         System.out.println("Bem-vindo!");
     }
