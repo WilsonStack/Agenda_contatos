@@ -21,13 +21,13 @@
 
 A **Agenda de Contatos** é um sistema de gerenciamento desenvolvido de forma **incremental**, onde cada versão evolui a estrutura anterior aplicando novos conceitos de Java e POO.
 
-O objetivo é acompanhar na prática a progressão do aprendizado — partindo de variáveis simples até a desacoplagem de código em classes dedicadas, encapsulamento e boas práticas de arquitetura.
+O objetivo é acompanhar na prática a progressão do aprendizado — partindo de variáveis simples até a arquitetura orientada a objetos com classes bem definidas e código estabilizado.
 
 ---
 
 ## 🎯 Objetivo
 
-Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estruturas de dados, modularização em pacotes e separação de responsabilidades ao longo das etapas da disciplina.
+Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estruturas de dados, modularização em pacotes e manutenção de código (correção de bugs) ao longo das etapas da disciplina.
 
 ---
 
@@ -52,9 +52,9 @@ Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estrut
 | **v0.1.0** | Arrays | Vetores, índices, `for`, capacidade fixa |
 | **v0.2.0** | `List` + `ArrayList` | Coleções dinâmicas, `add()`, `get()`, `remove()`, `size()` |
 | **v0.3.0** | `List` + `ArrayList` | Alteração com `set()` e CRUD completo |
-| **v1.0.0** | Modularização procedural | Métodos estáticos dedicados em classe única, pacote `br.edu.principal` |
-| **v1.1.0** | Separação de Conceitos (POO) | Separação nas classes `Agenda`, `Uteis` e `Principal` |
-| **v1.1.1** ✅ | Refatoração e Robustez | Métodos auxiliares de validação, formatação de dados e correções |
+| **v1.0.0** | Modularização procedural | Métodos estáticos em classe única, pacote `br.edu.principal` |
+| **v1.1.0** | Orientação a Objetos (POO) | Separação nas classes `Agenda`, `Uteis` e `Principal` |
+| **v1.1.1** ✅ | Correção de Bugs (Patch) | Correção de tratamento de exceções, buffer do Scanner e ajustes finos |
 
 ---
 
@@ -71,16 +71,16 @@ Substituição dos arrays por **`List` e `ArrayList`**, eliminando o limite de r
 Adição da funcionalidade de **alterar contatos** com o método `set()`, completando as quatro operações básicas do sistema (Create, Read, Update, Delete).
 
 ### 🔹 v1.0.0 — Modularização Procedural
-Isolamento das operações em métodos estáticos dentro da classe `Principal`, padronizando a captura de entradas numéricas com `Integer.parseInt(sc.nextLine())`.
+Isolamento das operações em métodos estáticos dentro da classe `Principal`.
 
 ### 🔹 v1.1.0 — Orientação a Objetos (POO)
-Transição para o paradigma orientado a objetos com a divisão do sistema em três classes com responsabilidades bem definidas:
-* **`Agenda`**: Encapsula as listas de dados e as regras do CRUD.
-* **`Uteis`**: Métodos estáticos utilitários de exibição de menus e formatação.
-* **`Principal`**: Ponto de entrada da aplicação e controle do loop principal.
+Transição para o paradigma orientado a objetos com a divisão do sistema nas classes `Agenda`, `Uteis` e `Principal`.
 
-### 🔹 v1.1.1 — Refatoração e Robustez *(versão atual)*
-Aprimoramento da arquitetura da `v1.1.0` com adição de validações de entrada, limpeza de buffer do teclado, mensagens de feedback mais claras ao usuário e prevenção de exceções durante a manipulação dos contatos.
+### 🔹 v1.1.1 — Correção de Bugs *(versão atual)*
+Versão de manutenção (patch) focada exclusivamente em estabilidade:
+* **Correção de Buffers:** Ajuste na leitura do `Scanner` para evitar falhas ao ler strings após inteiros.
+* **Tratamento de Exceções:** Prevenção de erros ao tentar acessar ou excluir índices inexistentes na lista.
+* **Ajustes de Exibição:** Correção de falhas de formatação no menu interativo e mensagens no console.
 
 ---
 
