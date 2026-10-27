@@ -1,70 +1,46 @@
 package br.edu.principal;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 public class Persistencia {
-    public static void salvarContatos(List<String> nomes, List<String> celulares, List<String> emails) {
 
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter("contatos.txt"));
-            for (int i = 0; i < nomes.size(); i++) {
+    private static final String ARQUIVO = "contatos.txt";
 
-                String linha = nomes.get(i) + ";"
-                        + celulares.get(i) + ";"
-                        + emails.get(i);
+    public static void carregarContatos(List<String> nomes, List<String> celulares, List<String> emails) {
+        File file = new File(ARQUIVO);
+        if (!file.exists()) {
+            return;
+        }
 
-                pw.println(linha);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] partes = linha.split(";");
+                if (partes.length == 3) {
+                    nomes.add(partes[0]);
+                    celulares.add(partes[1]);
+                    emails.add(partes[2]);
+                }
             }
-            pw.close();
-
-            System.out.println("Contatos salvos com sucesso!");
-
         } catch (IOException e) {
-
-            System.out.println("Erro ao salvar os contatos!");
-            System.out.println("Motivo: " + e.getMessage());
-            System.out.print("Strack Trace: ");
-            e.printStackTrace();
+            System.out.println("Erro ao carregar contatos: " + e.getMessage());
         }
     }
 
-    public static void carregarContatos(
-            List<String> nomes,
-            List<String> celulares,
-            List<String> emails) {
-
-        File file = new File("contatos.txt");
-
-        if (!file.exists()) return;
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String linha = br.readLine();
-
-            while (linha != null) {
-                String[] dados = linha.split(";");
-                if (dados.length == 3) {
-                    nomes.add(dados[0]);
-                    celulares.add(dados[1]);
-                    emails.add(dados[2]);
-                }
-                else {
-                    System.out.println("Registro inválido ignorado: " + linha);
-                }
-                linha = br.readLine();
+    public static void salvarContatos(List<String> nomes, List<String> celulares, List<String> emails) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARQUIVO))) {
+            for (int i = 0; i < nomes.size(); i++) {
+                bw.write(nomes.get(i) + ";" + celulares.get(i) + ";" + emails.get(i));
+                bw.newLine();
             }
-            br.close();
         } catch (IOException e) {
-            System.out.println("Erro ao carregar os contatos!");
-            System.out.println("Motivo: " + e.getMessage());
-            System.out.print("Strack Trace: ");
-            e.printStackTrace();
+            System.out.println("Erro ao salvar contatos: " + e.getMessage());
         }
     }
 }

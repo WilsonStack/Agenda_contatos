@@ -1,42 +1,42 @@
-# 🗂️ Agenda de Contatos - Versão V2.1.0
+# 🗂️ Agenda de Contatos - Versão V3.0.0
 
-> Oitava etapa (Persistência de Dados em Arquivo) do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
+> Nona etapa (Introdução a Classes e Objetos) do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
 
 ---
 
 ## 📌 Visão Geral
 
-Esta versão introduz a **persistência de dados em arquivo texto**. Os contatos deixam de existir apenas em memória: ao sair do programa, são gravados no arquivo `contatos.txt` e, na próxima execução, são carregados automaticamente.
+Esta versão marca a transição da abordagem procedural para a **Programação Orientada a Objetos (POO)**, com a criação da classe `Contato`, que agrupa nome, celular e e-mail em uma única estrutura.
 
-Diferente das versões anteriores, em que todos os dados eram perdidos ao encerrar a aplicação, a **V2.1.0** mantém a agenda entre uma execução e outra, usando as classes de entrada e saída do pacote `java.io`.
+Nesta etapa, a classe é apresentada e testada no `Principal`, enquanto o CRUD da agenda continua operando sobre as três listas de `String` (`nomes`, `celulares` e `emails`). A **V3.0.0** introduz o objeto como forma de representar um contato, preparando o terreno para as próximas versões.
 
 ---
 
-## 🔄 O que Mudou na Versão V2.1.0?
+## 🔄 O que Mudou na Versão V3.0.0?
 
-* 💾 **Nova classe `Persistencia.java`:**
-  * **`salvarContatos()`:** grava os contatos em `contatos.txt`, uma linha por contato, no formato `nome;celular;email`. Ao concluir, exibe a mensagem "Contatos salvos com sucesso!".
-  * **`carregarContatos()`:** se o arquivo existir, lê linha por linha e preenche as três listas. Se o arquivo não existir, a agenda começa vazia.
-  * **Validação na leitura:** cada linha deve ter exatamente 3 campos. Linhas fora desse padrão são ignoradas com o aviso "Registro inválido ignorado".
-  * **Tratamento de erros:** falhas de leitura ou gravação (`IOException`) exibem uma mensagem, o motivo (`getMessage()`) e o rastreio do erro (`printStackTrace()`).
-* 🔁 **Atualização do `Principal.java`:**
-  * Os contatos são carregados do arquivo antes de o menu ser exibido.
-  * A opção **6 - Sair** grava os contatos no arquivo antes de encerrar o programa.
-* 🖥️ **Interface:** o banner inicial exibe a versão v2.1.0 e a opção 7 abre uma janela com informações sobre a agenda.
+* 🧱 **Nova classe `Contato.java`:**
+  * Define os atributos públicos `nome`, `celular` e `email`.
+  * Não possui construtor explícito, então usa o construtor padrão do Java.
+* 🧪 **Atualização do `Principal.java`:**
+  * Cria dois objetos `Contato` com o operador `new`, atribui valores diretamente aos atributos e exibe os dados em memória com o título "=== Teste de Objetos (v3.0.0) ===", antes do menu.
+  * Em seguida, carrega os contatos do arquivo e executa o menu em um laço `do-while`, com `switch` clássico (`case` e `break`).
+  * A opção **0 - Sair** salva os contatos e encerra o programa.
+* 📦 **Base anterior mantida:**
+  * `Agenda.java`, `Persistencia.java` e `Uteis.java` continuam trabalhando com as listas `nomes`, `celulares` e `emails`, ligadas apenas pela posição.
 
 ---
 
 ## 🛠️ Tecnologias e Conceitos Aplicados
 
-* **Persistência em Arquivo Texto (`java.io`):**
-  * **Gravação:** `FileWriter` combinado com `PrintWriter` e o método `println()`.
-  * **Leitura:** `FileReader` combinado com `BufferedReader` e o método `readLine()`.
-  * **Verificação de existência:** classe `File` com o método `exists()`.
-* **Tratamento de Exceções:** blocos `try/catch` para `IOException`.
-* **Formato Delimitado:** campos separados por `;` e leitura com `split(";")`, validando a quantidade de campos de cada registro.
-* **Ciclo de Vida dos Dados:** carregamento na inicialização e gravação no encerramento do programa.
-* **Estrutura Multiclasse:** quatro arquivos Java no pacote `br.edu.principal`, com `Agenda` (CRUD), `Persistencia` (arquivo), `Uteis` (interface) e `Principal` (fluxo).
-* **Passagem de Listas por Parâmetro:** os métodos recebem as listas `nomes`, `celulares` e `emails` e modificam diretamente seu conteúdo.
+* **Orientação a Objetos (POO):**
+  * **Classe e Objeto:** a classe `Contato` como molde e cada contato como uma instância.
+  * **Atributos de Classe:** `nome`, `celular` e `email`.
+  * **Instanciação:** uso do operador `new` com o construtor padrão.
+  * **Acesso Direto aos Atributos:** leitura e escrita pelo operador ponto (`c1.nome`).
+  * **Objetos Independentes:** `c1` e `c2` têm estados próprios.
+* **Persistência em Arquivo Texto:** `BufferedReader` com `FileReader` para ler e `BufferedWriter` com `FileWriter` para gravar, usando `try-with-resources`. O arquivo `contatos.txt` guarda uma linha por contato, no formato `nome;celular;email`, e o nome do arquivo fica em uma constante (`ARQUIVO`).
+* **Estrutura Multiclasse:** cinco arquivos Java no pacote `br.edu.principal`, com métodos estáticos nas classes `Agenda`, `Persistencia` e `Uteis`.
+* **Controle de Fluxo:** laço `do-while` com `switch` clássico e opção 0 para encerrar.
 
 ---
 
@@ -48,8 +48,9 @@ src/
     └── edu/
         └── principal/
             ├── Agenda.java        # Operações do CRUD sobre as listas de dados
-            ├── Persistencia.java  # [NOVO] Leitura e gravação do arquivo contatos.txt
-            ├── Principal.java     # [ATUALIZADO] Carrega contatos ao iniciar e salva ao sair
+            ├── Contato.java       # [NOVO] Classe que modela a entidade Contato
+            ├── Persistencia.java  # Leitura e gravação do arquivo contatos.txt
+            ├── Principal.java     # [ATUALIZADO] Ponto de entrada e teste de instanciação de objetos
             └── Uteis.java         # Utilitários de interface e exibição de menu
 ```
 
@@ -57,19 +58,20 @@ src/
 
 ## ⚠️ Limitações da Versão
 
-* **Estrutura de listas paralelas:** cada contato é representado por três listas separadas (`List<String>`), ligadas apenas pela posição, em vez de um objeto `Contato` dedicado.
-* **Contato sem e-mail é perdido:** se o e-mail ficar em branco, a linha gravada termina em `;` e, ao carregar, é tratada como registro inválido. O contato some do arquivo no próximo salvamento. O mesmo ocorre se algum campo contiver `;`.
-* **Salvamento apenas ao sair:** os dados só são gravados pela opção 6. Se o programa fechar de outra forma, as alterações da sessão se perdem.
-* **Falha ao salvar não impede o encerramento:** se a gravação der erro, a mensagem é exibida, mas o programa sai mesmo assim.
+* **`Contato` ainda não é usado pela agenda:** os objetos existem apenas no teste do `Principal`. O CRUD e a persistência continuam com listas paralelas de `String`.
+* **Código de teste a cada execução:** os dois contatos de exemplo são impressos antes do menu, sem fazer parte da agenda.
+* **Atributos públicos:** os dados são acessados diretamente pelo operador ponto, sem encapsulamento.
+* **Contato sem e-mail é perdido sem aviso:** se o e-mail ficar em branco, a linha gravada termina em `;` e, ao carregar, é descartada em silêncio. O contato some do arquivo no próximo salvamento. O mesmo ocorre se algum campo contiver `;`.
+* **Salvamento apenas ao sair:** os dados só são gravados pela opção 0.
 * **Entrada não numérica no menu:** digitar uma letra causa `InputMismatchException` e encerra o programa sem salvar.
-* **Busca por nome completo e exato:** não há busca parcial. Com nomes repetidos, a pesquisa mostra todos, mas alterar atua no último contato encontrado e excluir atua no primeiro.
-* **Sem validação de dados:** campos vazios são aceitos, e a opção 7 (`JOptionPane`) exige interface gráfica.
+* **Vários `Scanner` sobre a entrada padrão:** `lerOpcao()` e cada método de `Agenda` criam o próprio `Scanner`, sem fechá-lo. Funciona na digitação normal, mas pode perder dados quando a entrada é colada ou redirecionada.
+* **Busca por nome completo e exato:** não há busca parcial. Alterar e excluir atuam apenas no primeiro contato com o nome informado.
 
 ---
 
 ## 🔧 Como Executar
 
-Requer **JDK 14 ou superior**.
+Requer **JDK 8 ou superior** (esta versão usa `switch` clássico, sem `->`).
 
 1. **Compilar todas as classes do pacote (a partir da pasta `src`):**
    ```bash
