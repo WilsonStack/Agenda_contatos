@@ -1,14 +1,14 @@
 package br.edu.principal;
 
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 public class Uteis {
-
     public static void mostraInicializacao() {
         System.out.println("==========================");
-        System.out.println("    AGENDA DE CONTATOS    ");
-        System.out.println("          v3.1.0          ");
+        System.out.println("     AGENDA DE CONTATOS    ");
+        System.out.println("          v3.2.0           ");
         System.out.println("==========================");
         System.out.println("Bem-vindo!");
     }
@@ -21,22 +21,32 @@ public class Uteis {
         System.out.println("4 - Alterar contato");
         System.out.println("5 - Excluir contato");
         System.out.println("6 - Sair");
-        System.out.println("7 - Sobre");
-        System.out.print("Escolha uma opção: ");
+        System.out.println("7 - Informações Sobre a Agenda de Contatos");
     }
 
     public static int selecionaOpcao(Scanner sc) {
-        int opcao = sc.nextInt();
+        System.out.println("");
+        System.out.print("Escolha uma opção: ");
+        int opc = sc.nextInt();
         sc.nextLine();
-        return opcao;
+        return opc;
     }
 
     public static boolean sair() {
-        System.out.println("Encerrando a agenda... Até logo!");
+        System.out.println("Saindo da Agenda de Contatos...");
         return false;
     }
 
     public static void sobre() {
-        JOptionPane.showMessageDialog(null, "Agenda de Contatos - v3.1.0\nDesenvolvido na disciplina de POO.");
+        JOptionPane.showMessageDialog(null,
+                "Desenvolvido por Roger M. Sarmento!");
     }
 }
+
+
+
+
+
+
+
+
