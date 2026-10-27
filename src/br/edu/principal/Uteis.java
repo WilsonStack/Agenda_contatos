@@ -8,7 +8,7 @@ public class Uteis {
     public static void mostraInicializacao() {
         System.out.println("==========================");
         System.out.println("    AGENDA DE CONTATOS    ");
-        System.out.println("          v3.0.0          ");
+        System.out.println("          v3.1.0          ");
         System.out.println("==========================");
         System.out.println("Bem-vindo!");
     }
@@ -20,22 +20,23 @@ public class Uteis {
         System.out.println("3 - Procurar contato");
         System.out.println("4 - Alterar contato");
         System.out.println("5 - Excluir contato");
-        System.out.println("0 - Sair");
+        System.out.println("6 - Sair");
+        System.out.println("7 - Sobre");
         System.out.print("Escolha uma opção: ");
     }
 
-    public static int lerOpcao() {
-        Scanner sc = new Scanner(System.in);
+    public static int selecionaOpcao(Scanner sc) {
         int opcao = sc.nextInt();
         sc.nextLine();
         return opcao;
     }
 
-    public static void mostraEncerramento() {
+    public static boolean sair() {
         System.out.println("Encerrando a agenda... Até logo!");
+        return false;
     }
 
-    public static void exibirMensagem(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+    public static void sobre() {
+        JOptionPane.showMessageDialog(null, "Agenda de Contatos - v3.1.0\nDesenvolvido na disciplina de POO.");
     }
 }

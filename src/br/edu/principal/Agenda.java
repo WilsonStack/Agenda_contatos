@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class Agenda {
 
-    public static void adicionar(List<String> nomes, List<String> celulares, List<String> emails) {
-        Scanner sc = new Scanner(System.in);
+    public static void adicionar(Scanner sc, List<String> nomes, List<String> celulares, List<String> emails) {
         System.out.print("Nome: ");
         nomes.add(sc.nextLine());
         System.out.print("Celular: ");
@@ -27,8 +26,7 @@ public class Agenda {
         }
     }
 
-    public static void pesquisar(List<String> nomes, List<String> celulares, List<String> emails) {
-        Scanner sc = new Scanner(System.in);
+    public static void pesquisar(Scanner sc, List<String> nomes, List<String> celulares, List<String> emails) {
         System.out.print("Digite o nome para pesquisar: ");
         String termo = sc.nextLine();
         boolean encontrado = false;
@@ -44,8 +42,7 @@ public class Agenda {
         }
     }
 
-    public static void atualizar(List<String> nomes, List<String> celulares, List<String> emails) {
-        Scanner sc = new Scanner(System.in);
+    public static void atualizar(Scanner sc, List<String> nomes, List<String> celulares, List<String> emails) {
         System.out.print("Digite o nome do contato que deseja alterar: ");
         String termo = sc.nextLine();
 
@@ -64,8 +61,7 @@ public class Agenda {
         System.out.println("Contato não encontrado!");
     }
 
-    public static void excluir(List<String> nomes, List<String> celulares, List<String> emails) {
-        Scanner sc = new Scanner(System.in);
+    public static void excluir(Scanner sc, List<String> nomes, List<String> celulares, List<String> emails) {
         System.out.print("Digite o nome do contato que deseja excluir: ");
         String termo = sc.nextLine();
 
