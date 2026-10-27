@@ -1,49 +1,49 @@
-# 🗂️ Agenda de Contatos - Versão V3.2.0
+# 🗂️ Agenda de Contatos - Versão V3.3.0
 
-> Décima primeira etapa (CRUD Orientado a Objetos) do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
+> Décima segunda etapa (Encapsulamento) do desenvolvimento incremental do projeto para a disciplina de **Programação Orientada a Objetos (POO)**.
 
 ---
 
 ## 📌 Visão Geral
 
-Esta versão conclui a migração do CRUD para a **Programação Orientada a Objetos**: as operações da agenda e a persistência em arquivo passam a trabalhar diretamente com objetos `Contato`, armazenados em uma única `List<Contato>`.
+Esta versão introduz o **encapsulamento** na classe `Contato`. Os atributos deixam de ser públicos e passam a ser acessados apenas por meio de **construtores**, **getters** e **setters**.
 
-Diferente da versão V3.1.0, em que a `List<Contato>` aparecia apenas no código de teste do `main` e a agenda real continuava usando três listas de `String` (`nomes`, `celulares`, `emails`), a **V3.2.0** usa a lista de objetos em todo o fluxo da aplicação.
+Diferente da versão V3.2.0, em que as demais classes liam e alteravam `contato.nome`, `contato.celular` e `contato.email` diretamente pelo operador ponto, a **V3.3.0** obriga todas as classes a usarem os métodos da própria `Contato` para acessar seus dados.
 
 ---
 
-## 🔄 O que Mudou na Versão V3.2.0?
+## 🔄 O que Mudou na Versão V3.3.0?
 
-* 🧱 **Dados reunidos em objetos:**
-  * A `List<Contato>` substitui as três listas paralelas. Cada contato é um objeto `Contato` com `nome`, `celular` e `email`.
-  * Os métodos do CRUD deixam de receber três listas e passam a receber apenas `List<Contato>`.
+* 🔒 **Encapsulamento em `Contato.java`:**
+  * Os atributos `nome`, `celular` e `email` passaram a ser **privados** (`private`).
+  * A classe ganhou um construtor padrão (sem parâmetros) e um construtor com os três atributos, que usa `this` para diferenciar atributo e parâmetro.
+  * Foram criados os métodos `get` e `set` de cada atributo.
 * 📋 **`Agenda.java`:**
-  * Ao adicionar, cria um objeto com `new Contato()`, preenche seus atributos e o insere na lista.
-  * Listar, pesquisar, alterar e excluir percorrem a lista de objetos com `for-each`. A exclusão usa `contatos.remove(objeto)`.
-  * A listagem exibe cada contato em bloco (nome, celular e e-mail em linhas separadas) e cada operação mostra um cabeçalho `=== ... ===`.
+  * Ao adicionar, o contato é criado direto com `new Contato(nome, celular, email)`.
+  * Listar, pesquisar, alterar e excluir leem os dados pelos getters (`getNome()`, `getCelular()`, `getEmail()`), e a alteração é feita pelos setters.
+  * Foi removida uma variável sem uso no método `excluir`.
 * 💾 **`Persistencia.java`:**
-  * `salvarContatos` e `carregarContatos` passam a receber `List<Contato>`. A gravação usa `PrintWriter` com `FileWriter`.
-  * Ao carregar, cada linha válida vira um objeto `Contato`. Linhas inválidas geram o aviso "Registro inválido ignorado".
-  * Ao salvar, é exibida a mensagem "Contatos salvos com sucesso!".
-* 🧹 **`Principal.java`:**
-  * O código de teste (contatos de exemplo criados e impressos ao iniciar) foi removido. O `main` cria uma única `List<Contato>`, carrega o arquivo e repassa a lista às operações do menu.
+  * Ao gravar, monta cada linha do arquivo com os getters.
+  * Ao carregar, cria cada contato com `new Contato(dados[0], dados[1], dados[2])`, em vez de preencher os atributos um a um.
+* 🔁 **`Principal.java`:**
+  * O laço do menu passou a ser `while (true)`, sem a variável `continuar`.
+  * A opção Sair salva os contatos, exibe a mensagem de saída, fecha o `Scanner` e encerra o programa com `return`.
 * 🖥️ **`Uteis.java`:**
-  * Versão exibida atualizada para v3.2.0, textos do menu revisados e pergunta "Escolha uma opção" movida para `selecionaOpcao()`.
-  * A janela "Sobre" passa a exibir os créditos do desenvolvedor.
+  * Versão exibida atualizada para v3.3.0.
+  * O método `sair()` passou a ser `void`, já que o controle de encerramento agora fica no `Principal`.
 
 ---
 
 ## 🛠️ Tecnologias e Conceitos Aplicados
 
-* **Coleções de Objetos:**
-  * **`List<Contato>` e `ArrayList`:** uma única estrutura no lugar das listas paralelas.
-  * **Passagem de coleção como parâmetro** e percurso com `for-each`.
-  * **Busca e remoção de objetos:** comparação do nome com `equalsIgnoreCase` e `remove(objeto)`.
 * **Orientação a Objetos (POO):**
-  * **Instanciação de Objetos:** uso de `new Contato()` dentro das operações do CRUD.
-  * **Objeto como unidade de dados:** nome, celular e e-mail agrupados em um único objeto.
-* **Persistência em Arquivo Texto:** arquivo `contatos.txt` com uma linha por contato, no formato `nome;celular;email`, usando `PrintWriter` e `BufferedReader`.
-* **Estrutura Multiclasse:** cinco arquivos Java no pacote `br.edu.principal`.
+  * **Encapsulamento:** uso do modificador de acesso `private` para ocultar os dados de `Contato`.
+  * **Getters e Setters:** métodos públicos que controlam a leitura e a alteração dos atributos.
+  * **Construtores:** construtor padrão e construtor com parâmetros (sobrecarga de construtores).
+  * **Palavra-chave `this`:** diferencia o atributo do objeto do parâmetro de mesmo nome.
+* **Acesso por Métodos:** substituição do operador ponto (`.`) por chamadas de métodos para acessar os dados do objeto.
+* **Controle de Fluxo:** laço `while (true)` com encerramento do programa por `return`.
+* **Coleções e Persistência:** `List<Contato>` e arquivo `contatos.txt` continuam como base do sistema.
 
 ---
 
@@ -54,8 +54,8 @@ src/
 └── br/
     └── edu/
         └── principal/
-            ├── Agenda.java        # Operações do CRUD sobre List<Contato>
-            ├── Contato.java       # Entidade Contato (atributos públicos)
+            ├── Agenda.java        # Operações do CRUD usando construtor, getters e setters
+            ├── Contato.java       # Entidade encapsulada: atributos private, construtores, getters e setters
             ├── Persistencia.java  # Leitura e gravação do arquivo contatos.txt
             ├── Principal.java     # Ponto de entrada (main) e loop do menu
             └── Uteis.java         # Utilitários de interface e exibição de menu
@@ -65,12 +65,13 @@ src/
 
 ## ⚠️ Limitações da Versão
 
-* **Sem encapsulamento:** os atributos de `Contato` são públicos e acessados diretamente pelo operador ponto (tema da próxima versão).
+* **Encapsulamento sem validação:** os setters e o construtor aceitam qualquer valor, inclusive texto vazio ou `null`. A classe protege o acesso, mas não garante dados válidos.
+* **Classes apenas com métodos estáticos:** `Agenda`, `Persistencia` e `Uteis` não são instanciadas. A lista de contatos fica no `main` e é repassada por parâmetro.
 * **Contato sem e-mail é perdido:** se o e-mail ficar em branco, a linha gravada termina em `;` e, ao carregar, é tratada como registro inválido. O contato some do arquivo no próximo salvamento. O mesmo ocorre se algum campo contiver `;`.
 * **Salvamento apenas ao sair:** os dados só são gravados pela opção 6. Se o programa fechar de outra forma, as alterações da sessão se perdem.
 * **Entrada não numérica no menu:** digitar uma letra causa `InputMismatchException` e encerra o programa sem salvar.
 * **Busca por nome completo e exato:** não há busca parcial. Com nomes repetidos, alterar e excluir atuam apenas no último contato encontrado.
-* **Sem validação de dados:** campos vazios são aceitos, e a opção 7 (`JOptionPane`) exige interface gráfica.
+* **Interface gráfica na opção 7:** o uso de `JOptionPane` exige ambiente com interface gráfica.
 
 ---
 
