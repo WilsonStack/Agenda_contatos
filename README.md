@@ -1,95 +1,193 @@
 # 📒 Agenda de Contatos
 
-> *Desenvolvido como projeto prático no IFCE Campus Maranguape.*[cite: 12]
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
+![Versão atual](https://img.shields.io/badge/vers%C3%A3o-v3.3.0-success)
+![Interface](https://img.shields.io/badge/interface-console-lightgrey)
+![IFCE](https://img.shields.io/badge/IFCE-Campus%20Maranguape-2e7d32)
 
-A **Agenda de Contatos** é um sistema de gerenciamento desenvolvido de forma **incremental**, onde cada versão evolui a estrutura anterior aplicando novos conceitos de Java e Programação Orientada a Objetos (POO).
+> Projeto prático desenvolvido no **IFCE – Campus Maranguape**, na disciplina de Programação Orientada a Objetos (POO).
 
-O objetivo é acompanhar na prática a progressão do aprendizado — partindo de variáveis simples até a desacoplagem de código em classes dedicadas, persistência em arquivos, modelagem de objetos, encapsulamento e boas práticas de arquitetura.
-O objetivo é acompanhar na prática a progressão do aprendizado — partindo de variáveis simples até a modelagem orientada a objetos, persistência em arquivos e encapsulamento.
+Sistema de gerenciamento de contatos em Java construído de forma **incremental**: cada versão parte da anterior e acrescenta um conceito novo, de variáveis simples até encapsulamento, passando por coleções, modularização em classes dedicadas e persistência em arquivo.
 
----
-
-## 🎯 Objetivo
-
-Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estruturas de dados, modularização em pacotes, persistência de dados e aplicação dos pilares de Orientação a Objetos ao longo das etapas da disciplina.
-Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estruturas de dados, modularização em pacotes, persistência de dados e aplicação dos pilares de Orientação a Objetos ao longo das etapas da disciplina de **Programação Orientada a Objetos (POO)**.[cite: 13]
+Cada pasta `vX.Y.Z` deste repositório é uma versão completa e executável, com o seu próprio README. Assim dá para ver o código mudando a cada etapa do aprendizado.
 
 ---
 
-@@ -24,10 +26,10 @@ Desenvolver uma Agenda de Contatos em Java, acompanhando a evolução das estrut
-| **v1.1.0** | Separação de Conceitos | Separação nas classes `Agenda`, `Uteis` e `Principal` |
-| **v1.1.1** | Correção de Bugs (Patch) | Correção do fluxo de encerramento (opção Sair), buffers e ajustes finos |
-| **v2.1.0** | Persistência em Arquivo TXT | Classe `Persistencia`, leitura e escrita em `contatos.txt` com `java.io` |
-| **v3.0.0** | Classes e Objetos (POO) | Criação da entidade `Contato`, atributos e instanciação com `new` |
-| **v3.1.0** | Coleção de Objetos | Armazenamento dinâmico de objetos utilizando `List<Contato>` |
-| **v3.0.0** | Classes e Objetos (POO) | Criação da entidade `Contato`, atributos e instanciação com `new`[cite: 11] |
-| **v3.1.0** | Coleção de Objetos | Armazenamento dinâmico de objetos utilizando `List<Contato>`[cite: 13] |
-| **v3.2.0** | CRUD Orientado a Objetos | Refatoração do CRUD e da persistência para operar sobre `List<Contato>` |
-| **v3.3.0** ✅ | Encapsulamento *(atual)* | Atributos `private`, construtor parametrizado (`this`), `getters` e `setters` |
-| **v3.3.0** ✅ | Encapsulamento *(versão atual)* | Atributos `private`, construtor parametrizado (`this`), `getters` e `setters` |
+## ✨ Funcionalidades (v3.3.0)
+
+| Funcionalidade | O que faz | Onde fica |
+|---|---|---|
+| ➕ Adicionar | Cadastra um contato com nome, celular e e-mail | `Agenda.adicionar()` |
+| 📋 Listar | Mostra todos os contatos cadastrados | `Agenda.listar()` |
+| 🔍 Pesquisar | Busca contatos | `Agenda.pesquisar()` |
+| ✏️ Atualizar | Altera os dados de um contato | `Agenda.atualizar()` |
+| 🗑️ Excluir | Remove um contato | `Agenda.excluir()` |
+| 💾 Persistência | Carrega e salva automaticamente em `contatos.txt` | `Persistencia.carregarContatos()` e `Persistencia.salvarContatos()` |
 
 ---
 
-@@ -66,14 +68,14 @@ Introdução da classe **`Persistencia`** utilizando o pacote `java.io` (`Buffer
-- **Salvamento Automático:** Gravação dos contatos no formato `nome;celular;email` ao encerrar o sistema.
+## 📊 Evolução das Versões
 
-### 🔹 v3.0.0 — Introdução a Classes e Objetos (POO)
-Início da transição da abordagem procedural para a **Programação Orientada a Objetos**:
-- **Classe `Contato`:** Modelagem da entidade com os atributos `nome`, `celular` e `email`.
-- **Instanciação:** Criação de objetos independentes com o operador `new` e manipulação de referências.
-Início da transição da abordagem procedural para a **Programação Orientada a Objetos**[cite: 11]:
-- **Classe `Contato`:** Modelagem da entidade com os atributos `nome`, `celular` e `email`[cite: 11].
-- **Instanciação:** Criação de objetos independentes com o operador `new` e manipulação de referências[cite: 11].
+| Versão | Abordagem | Principais conceitos |
+|---|---|---|
+| [v0.0.0](./v0.0.0) | Variáveis simples | `Scanner`, `if/else`, `while`, 1 contato em memória |
+| [v0.1.0](./v0.1.0) | Arrays | Vetores, índices, `for`, capacidade fixa |
+| [v0.2.0](./v0.2.0) | `List` + `ArrayList` | Coleções dinâmicas: `add()`, `get()`, `remove()`, `size()` |
+| [v0.3.0](./v0.3.0) | `List` + `ArrayList` | `set()` e CRUD completo |
+| [v1.0.0](./v1.0.0) | Modularização procedural | Métodos estáticos, pacote `br.edu.principal` |
+| [v1.1.0](./v1.1.0) | Separação de responsabilidades | Classes `Agenda`, `Uteis` e `Principal` |
+| [v1.1.1](./v1.1.1) | Correção de bugs (patch) | Fluxo da opção Sair, buffer do `Scanner`, mensagens |
+| [v2.1.0](./v2.1.0) | Persistência em arquivo TXT | Classe `Persistencia`, `java.io`, `contatos.txt` |
+| [v3.0.0](./v3.0.0) | Classes e objetos | Entidade `Contato`, atributos, `new` |
+| [v3.1.0](./v3.1.0) | Coleção de objetos | `List<Contato>`, `for-each`, Generics |
+| [v3.2.0](./v3.2.0) | CRUD orientado a objetos | CRUD e persistência operando sobre `List<Contato>` |
+| [**v3.3.0**](./v3.3.0) ✅ | **Encapsulamento** *(atual)* | `private`, construtor parametrizado, `this`, getters e setters |
 
-### 🔹 v3.1.0 — Coleção de Objetos (`List<Contato>`)
-Aplicação de Generics e coleções dinâmicas sobre a própria classe de domínio:
-- Agrupamento de instâncias de `Contato` dentro de uma única lista `List<Contato>`.
-- Percurso de objetos utilizando `for-each` e `for` indexado com `get()`.
-Aplicação de Generics e coleções dinâmicas sobre a própria classe de domínio[cite: 13]:
-- Agrupamento de instâncias de `Contato` dentro de uma única lista `List<Contato>`[cite: 13].
-- Percurso de objetos utilizando `for-each` e `for` indexado com `get()`[cite: 13].
+<details>
+<summary><strong>📚 Ver histórico detalhado de cada versão</strong></summary>
 
-### 🔹 v3.2.0 — CRUD Orientado a Objetos
-Substituição definitiva das três listas paralelas de `String` (`nomes`, `celulares`, `emails`) por uma única coleção **`List<Contato>`** em todo o projeto:
-@@ -88,19 +90,27 @@ Refinamento da classe `Contato` aplicando o pilar de **Encapsulamento** para pro
+<br>
+
+**v0.0.0 — Variáveis simples.** Cadastro e exibição de um único contato por execução, usando apenas variáveis em memória.
+
+**v0.1.0 — Arrays.** Múltiplos contatos com vetores de tamanho fixo, percorridos por índice em laços de repetição.
+
+**v0.2.0 — Coleções dinâmicas.** `List` e `ArrayList` no lugar dos arrays, eliminando o limite de registros.
+
+**v0.3.0 — CRUD completo.** Alteração de contatos com `set()`, fechando as quatro operações básicas (Create, Read, Update, Delete).
+
+**v1.0.0 — Modularização procedural.** Operações isoladas em métodos estáticos, deixando o `main` mais enxuto.
+
+**v1.1.0 — Separação de responsabilidades.** O sistema passa a ter três classes:
+- `Agenda`: operações e regras do CRUD.
+- `Uteis`: menus e leitura de opções.
+- `Principal`: ponto de entrada e loop principal.
+
+**v1.1.1 — Correções.** Ajuste do encerramento pela opção Sair, correção da leitura de `String` após `int` com o `Scanner` e melhoria das mensagens no console.
+
+**v2.1.0 — Persistência em TXT.** Classe `Persistencia` com `BufferedReader`, `BufferedWriter` e `File`. Os contatos são carregados ao iniciar e gravados ao encerrar, no formato `nome;celular;email`.
+
+**v3.0.0 — Primeira classe de domínio.** Criação da classe `Contato` (`nome`, `celular`, `email`) e instanciação de objetos com `new`. Início da transição do estilo procedural para POO.
+
+**v3.1.0 — `List<Contato>`.** Objetos agrupados em uma lista tipada e percorridos com `for-each` e `for` indexado.
+
+**v3.2.0 — CRUD orientado a objetos.** As três listas paralelas de `String` (`nomes`, `celulares`, `emails`) foram substituídas por uma única `List<Contato>`. `Agenda` e `Persistencia` passaram a trabalhar com objetos `Contato`.
+
+**v3.3.0 — Encapsulamento.** Atributos `private`, construtor parametrizado (`new Contato(nome, celular, email)`) com `this`, e acesso aos dados apenas por getters e setters em `Agenda` e `Persistencia`.
+
+</details>
 
 ---
 
 ## 🗂️ Estrutura do Projeto
-## 🏗️ Estrutura Atual da Versão v3.3.0
 
-A aplicação utiliza uma única coleção de objetos `List<Contato>` e organiza suas responsabilidades no pacote `br.edu.principal`:
+Uma pasta por versão, cada uma independente das outras:
 
 ```text
 agenda_contatos/
-├── v0.0.0/ ... v2.1.0/         # Evolução procedural, modularização e persistência TXT
-├── v3.0.0/                     # Introdução à classe Contato e objetos
-├── v3.1.0/                     # Testes e manipulação de List<Contato>
-├── v3.2.0/                     # CRUD e Persistência orientados a objetos
-├── v3.3.0/                     # Versão Atual: Encapsulamento (private, construtor, get/set)
-│   └── src/br/edu/principal/
-│       ├── Agenda.java
-│       ├── Contato.java
-│       ├── Persistencia.java
-│       ├── Principal.java
-│       └── Uteis.java
+├── v0.0.0/ ... v2.1.0/   # Evolução procedural, modularização e persistência TXT
+├── v3.0.0/               # Introdução à classe Contato e objetos
+├── v3.1.0/               # Testes e manipulação de List<Contato>
+├── v3.2.0/               # CRUD e persistência orientados a objetos
+├── v3.3.0/               # Versão atual: encapsulamento (private, construtor, get/set)
 └── README.md
-Principal
-    │
-    └── List<Contato>
-            │
-            ├── Contato (Atributos privados, Construtor, Getters e Setters)
-            │
-            ├── Agenda
-            │     ├── adicionar()
-            │     ├── listar()
-            │     ├── pesquisar()
-            │     ├── atualizar()
-            │     └── excluir()
-            │
-            ├── Persistencia
-            │     ├── carregarContatos()
-            │     └── salvarContatos()
-            │
-            └── Uteis
-                  └── Menus e métodos auxiliares
+```
+
+---
+
+## 🏗️ Estrutura da Versão Atual (v3.3.0)
+
+### Arquivos
+
+```text
+v3.3.0/
+├── README.md
+└── src/br/edu/principal/
+    ├── Agenda.java
+    ├── Contato.java
+    ├── Persistencia.java
+    ├── Principal.java
+    └── Uteis.java
+```
+
+O arquivo `contatos.txt` é criado pelo programa ao ser encerrado, na pasta de onde ele é executado.
+
+### Classes
+
+Tudo fica no pacote `br.edu.principal`, com uma única coleção `List<Contato>`:
+
+```text
+Principal  (controla o loop do menu e mantém a List<Contato>)
+   │
+   ├── Uteis          → menus e leitura de opções
+   ├── Agenda         → adicionar() · listar() · pesquisar() · atualizar() · excluir()
+   └── Persistencia   → carregarContatos() · salvarContatos()
+
+Contato  → entidade usada por todas as classes acima
+```
+
+| Classe | Responsabilidade |
+|---|---|
+| `Contato` | Entidade com atributos privados, construtor parametrizado, getters e setters |
+| `Agenda` | CRUD sobre a `List<Contato>` |
+| `Persistencia` | Leitura e escrita do arquivo `contatos.txt` |
+| `Uteis` | Exibição de menus e métodos auxiliares |
+| `Principal` | Ponto de entrada da aplicação |
+
+---
+
+## ▶️ Como Executar
+
+**Pré-requisito:** JDK 8 ou superior instalado (`java -version` e `javac -version` devem funcionar).
+
+1. Entre na pasta da versão que quiser testar:
+
+```bash
+cd v3.3.0
+```
+
+2. Compile:
+
+```bash
+javac -d out src/br/edu/principal/*.java
+```
+
+3. Execute:
+
+```bash
+java -cp out br.edu.principal.Principal
+```
+
+> 💡 Execute sempre a partir da mesma pasta para o programa encontrar o `contatos.txt` criado antes.
+
+---
+
+## 💾 Formato dos Dados
+
+A partir da v2.1.0, os contatos são gravados em `contatos.txt`, um por linha, separados por ponto e vírgula:
+
+```text
+Maria Silva;85999990000;maria@email.com
+```
+
+---
+
+## ⚠️ Limitações Atuais
+
+- A interface é só por console.
+- O `;` é o separador do arquivo, então um `;` dentro de nome ou e-mail quebra a leitura daquela linha.
+- Os contatos são gravados ao encerrar pelo menu. Fechar o programa de forma abrupta (Ctrl+C, janela fechada) pode perder as alterações da sessão.
+
+## 🧭 Próximos Passos
+
+- [x] Classes e objetos
+- [x] Encapsulamento
+- [ ] Herança
+- [ ] Polimorfismo
+- [ ] Abstração e interfaces
+- [ ] Validação de entrada e tratamento de exceções
+- [ ] Formato de armazenamento mais robusto (CSV com tratamento de aspas, JSON)
+
+---
+
+<p align="center">Desenvolvido no <strong>IFCE – Campus Maranguape</strong></p>
