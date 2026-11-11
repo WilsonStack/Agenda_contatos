@@ -43,15 +43,43 @@ Toda a evolução do código-fonte está registrada no histórico de versões, o
 | **v5.1.0** ✅ | **Refatoração da View** *(atual)* | Remoção da classe `Uteis`, integração nativa do `Scanner` na `AgendaView`. |
 
 <details>
-<summary><strong>📚 Ver histórico detalhado das últimas versões</strong></summary>
+<summary><strong>📚 Ver histórico detalhado de cada versão</strong></summary>
 
 <br>
 
-**v4.1.0 — Organização em Pacotes.** A estrutura de pastas deixou de ser um pacote único `principal` e foi dividida em `dao`, `modelo`, `servico`, `uteis` e `principal`.
+**v0.0.0 — Variáveis simples.** Cadastro e exibição de um único contato por execução, usando apenas variáveis em memória.
 
-**v5.0.0 — Arquitetura MVC.** A classe `Agenda` (serviço) foi removida para adotar o padrão MVC. Foram criados os pacotes `controle` (contendo o `AgendaController`) para gerir as regras de negócio e `visao` (contendo a `AgendaView`) para interagir com o usuário, isolando totalmente o sistema visual da lógica dos dados.
+**v0.1.0 — Arrays.** Múltiplos contatos com vetores de tamanho fixo, percorridos por índice em laços de repetição.
 
-**v5.1.0 — Refatoração da View.** O pacote e a classe `Uteis` foram removidos do projeto. As funções de leitura (`Scanner`) passaram a ser responsabilidade direta e exclusiva da `AgendaView`, simplificando as dependências.
+**v0.2.0 — Coleções dinâmicas.** `List` e `ArrayList` no lugar dos arrays, eliminando o limite de registros.
+
+**v0.3.0 — CRUD completo.** Alteração de contatos com `set()`, fechando as quatro operações básicas (Create, Read, Update, Delete).
+
+**v1.0.0 — Modularização procedural.** Operações isoladas em métodos estáticos, deixando o `main` mais enxuto.
+
+**v1.1.0 — Separação de responsabilidades.** O sistema passa a ter três classes:
+- `Agenda`: operações e regras do CRUD.
+- `Uteis`: menus e leitura de opções.
+- `Principal`: ponto de entrada e loop principal.
+
+**v1.1.1 — Correções.** Ajuste do encerramento pela opção Sair, correção da leitura de `String` após `int` com o `Scanner` e melhoria das mensagens no console.
+
+**v2.1.0 — Persistência em TXT.** Classe `Persistencia` com `BufferedReader`, `BufferedWriter` e `File`. Os contatos são carregados ao iniciar e gravados ao encerrar, no formato `nome;celular;email`.
+
+**v3.0.0 — Primeira classe de domínio.** Criação da classe `Contato` (`nome`, `celular`, `email`) e instanciação de objetos com `new`. Início da transição do estilo procedural para POO.
+
+**v3.1.0 — `List<Contato>`.** Objetos agrupados em uma lista tipada e percorridos com `for-each` e `for` indexado.
+
+**v3.2.0 — CRUD orientado a objetos.** As três listas paralelas de `String` (`nomes`, `celulares`, `emails`) foram substituídas por uma única `List<Contato>`. `Agenda` e `Persistencia` passaram a trabalhar com objetos `Contato`.
+
+**v3.3.0 — Encapsulamento.** Atributos `private`, construtor parametrizado (`new Contato(nome, celular, email)`) com `this`, e acesso aos dados apenas por getters e setters em `Agenda` e `Persistencia`.
+
+**v4.1.0 — Organização em Pacotes.** A estrutura de pastas deixou de ser um pacote único `principal` e foi dividida em `dao`, `modelo`, `servico`, `uteis` e `principal`[cite: 6].
+
+**v5.0.0 — Arquitetura MVC.** A classe `Agenda` (serviço) foi removida para adotar o padrão MVC. Foram criados os pacotes `controle` (contendo o `AgendaController`) para gerir as regras de negócio e `visao` (contendo a `AgendaView`) para interagir com o usuário, isolando totalmente o sistema visual da lógica dos dados[cite: 6].
+
+**v5.1.0 — Refatoração da View.** O pacote e a classe `Uteis` foram removidos do projeto. As funções de leitura (`Scanner`) passaram a ser responsabilidade direta e exclusiva da `AgendaView`, simplificando as dependências[cite: 6].
+
 </details>
 
 ---
