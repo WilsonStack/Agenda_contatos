@@ -1,107 +1,306 @@
-# 📒 Agenda de Contatos
+# Agenda de Contatos
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
-![Versão atual](https://img.shields.io/badge/vers%C3%A3o-v5.1.0-success)
-![Interface](https://img.shields.io/badge/interface-console-lightgrey)
-![IFCE](https://img.shields.io/badge/IFCE-Campus%20Maranguape-2e7d32)
+Aplicação desenvolvida em **Java** para gerenciamento de contatos, construída de forma incremental como parte das atividades da disciplina de **Programação Orientada a Objetos (POO)**.
 
-> Projeto prático desenvolvido no **IFCE – Campus Maranguape**, na disciplina de Programação Orientada a Objetos (POO).
+O projeto acompanha a evolução dos conceitos de programação, desde a utilização de variáveis e estruturas de dados até a aplicação de princípios de orientação a objetos, organização em camadas, persistência e interfaces gráficas.
 
-Sistema de gerenciamento de contatos em Java construído de forma **incremental**: cada versão parte da anterior e acrescenta conceitos novos, evoluindo de variáveis simples até ao encapsulamento e, na sua versão atual, culminando na implementação do **Padrão de Arquitetura MVC (Model-View-Controller)** com persistência de dados (DAO).
+**Versão atual: V5.1.0 — MVC Completo**
 
-Toda a evolução do código-fonte está registrada no histórico de versões, organizando a estrutura em múltiplos pacotes lógicos (`modelo`, `dao`, `controle`, `visao`, `principal`).
+## Objetivo
 
----
+Desenvolver uma aplicação que permita cadastrar, listar, pesquisar, atualizar e excluir contatos, aplicando progressivamente os conceitos estudados na disciplina.
 
-## ✨ Funcionalidades (v5.1.0)
+## Funcionalidades
 
-| Funcionalidade | O que faz | Onde fica o fluxo |
-|---|---|---|
-| ➕ Adicionar | Cadastra um contato com nome, celular e e-mail | `AgendaView` → `AgendaController` |
-| 📋 Listar | Mostra todos os contatos cadastrados | `AgendaView` → `AgendaController` |
-| 🔍 Buscar | Pesquisa contatos pelo nome | `AgendaView` → `AgendaController` |
-| 🗑️ Remover | Exclui um contato específico | `AgendaView` → `AgendaController` |
-| 💾 Persistência | Carrega e salva automaticamente em `contatos.txt` | `ContatoDAO.carregarContatos()` e `salvarContatos()` |
+- Adicionar contatos.
+- Listar contatos cadastrados.
+- Pesquisar contatos.
+- Atualizar informações.
+- Excluir contatos.
+- Salvar contatos em arquivo TXT.
+- Recuperar contatos automaticamente ao iniciar a aplicação.
+- Apresentar informações sobre o sistema.
 
----
+Cada contato possui os seguintes atributos:
 
-## 📊 Evolução das Versões (Histórico de Atualizações)
+- Nome
+- Celular
+- E-mail
 
-| Versão | Abordagem | Principais conceitos |
-|---|---|---|
-| **v0.0.0** | Variáveis simples | `Scanner`, `if/else`, `while`, 1 contato em memória |
-| **v0.1.0** | Arrays | Vetores, índices, `for`, capacidade fixa |
-| **v0.2.0** | `List` + `ArrayList` | Coleções dinâmicas: `add()`, `get()`, `remove()`, `size()` |
-| **v0.3.0** | `List` + `ArrayList` | `set()` e CRUD completo |
-| **v1.0.0** | Modularização procedural | Métodos estáticos |
-| **v1.1.0** | Separação de responsabilidades | Classes isoladas |
-| **v2.1.0** | Persistência em arquivo TXT | Manipulação de arquivos (`java.io`), `contatos.txt` |
-| **v3.0.0** | Classes e objetos | Entidade `Contato`, atributos, `new` |
-| **v3.3.0** | Encapsulamento | `private`, construtores, `this`, getters e setters |
-| **v4.1.0** | Organização em Pacotes | Múltiplos pacotes (`dao`, `modelo`, `servico`, `uteis`) |
-| **v5.0.0** | Arquitetura MVC | Divisão em `Model`, `View` e `Controller` |
-| **v5.1.0** ✅ | **Refatoração da View** *(atual)* | Remoção da classe `Uteis`, integração nativa do `Scanner` na `AgendaView`. |
+## Tecnologias utilizadas
 
-<details>
-<summary><strong>📚 Ver histórico detalhado de cada versão</strong></summary>
+- Java
+- Programação Orientada a Objetos
+- Collections Framework (`List` e `ArrayList`)
+- Manipulação de arquivos TXT
+- Tratamento de exceções
+- Padrão DAO (Data Access Object)
+- Padrão MVC (Model-View-Controller)
+- Git e GitHub
 
-<br>
-
-**v0.0.0 — Variáveis simples.** Cadastro e exibição de um único contato por execução, usando apenas variáveis em memória.
-
-**v0.1.0 — Arrays.** Múltiplos contatos com vetores de tamanho fixo, percorridos por índice em laços de repetição.
-
-**v0.2.0 — Coleções dinâmicas.** `List` e `ArrayList` no lugar dos arrays, eliminando o limite de registros.
-
-**v0.3.0 — CRUD completo.** Alteração de contatos com `set()`, fechando as quatro operações básicas (Create, Read, Update, Delete).
-
-**v1.0.0 — Modularização procedural.** Operações isoladas em métodos estáticos, deixando o `main` mais enxuto.
-
-**v1.1.0 — Separação de responsabilidades.** O sistema passa a ter três classes:
-- `Agenda`: operações e regras do CRUD.
-- `Uteis`: menus e leitura de opções.
-- `Principal`: ponto de entrada e loop principal.
-
-**v1.1.1 — Correções.** Ajuste do encerramento pela opção Sair, correção da leitura de `String` após `int` com o `Scanner` e melhoria das mensagens no console.
-
-**v2.1.0 — Persistência em TXT.** Classe `Persistencia` com `BufferedReader`, `BufferedWriter` e `File`. Os contatos são carregados ao iniciar e gravados ao encerrar, no formato `nome;celular;email`.
-
-**v3.0.0 — Primeira classe de domínio.** Criação da classe `Contato` (`nome`, `celular`, `email`) e instanciação de objetos com `new`. Início da transição do estilo procedural para POO.
-
-**v3.1.0 — `List<Contato>`.** Objetos agrupados em uma lista tipada e percorridos com `for-each` e `for` indexado.
-
-**v3.2.0 — CRUD orientado a objetos.** As três listas paralelas de `String` (`nomes`, `celulares`, `emails`) foram substituídas por uma única `List<Contato>`. `Agenda` e `Persistencia` passaram a trabalhar com objetos `Contato`.
-
-**v3.3.0 — Encapsulamento.** Atributos `private`, construtor parametrizado (`new Contato(nome, celular, email)`) com `this`, e acesso aos dados apenas por getters e setters em `Agenda` e `Persistencia`.
-
-**v4.1.0 — Organização em Pacotes.** A estrutura de pastas deixou de ser um pacote único `principal` e foi dividida em `dao`, `modelo`, `servico`, `uteis` e `principal`[cite: 6].
-
-**v5.0.0 — Arquitetura MVC.** A classe `Agenda` (serviço) foi removida para adotar o padrão MVC. Foram criados os pacotes `controle` (contendo o `AgendaController`) para gerir as regras de negócio e `visao` (contendo a `AgendaView`) para interagir com o usuário, isolando totalmente o sistema visual da lógica dos dados[cite: 6].
-
-**v5.1.0 — Refatoração da View.** O pacote e a classe `Uteis` foram removidos do projeto. As funções de leitura (`Scanner`) passaram a ser responsabilidade direta e exclusiva da `AgendaView`, simplificando as dependências[cite: 6].
-
-</details>
-
----
-
-## 🏗️ Estrutura do Projeto (v5.1.0 - MVC)
-
-### Arquivos e Pacotes
+## Estrutura do projeto
 
 ```text
-Agenda_contatos/
-├── .gitignore
-├── README.md
-└── src/
-    └── br/
-        └── edu/
-            ├── controle/
-            │   └── AgendaController.java
-            ├── dao/
-            │   └── ContatoDAO.java
-            ├── modelo/
-            │   └── Contato.java
-            ├── principal/
-            │   └── Principal.java
-            └── visao/
-                └── AgendaView.java
+AgendaContatos/
+├── src/
+│   └── br/
+│       └── edu/
+│           ├── principal/
+│           │   └── Principal.java
+│           ├── modelo/
+│           │   └── Contato.java
+│           ├── visao/
+│           │   └── AgendaView.java
+│           ├── controle/
+│           │   └── AgendaController.java
+│           └── dao/
+│               └── ContatoDAO.java
+├── contatos.txt
+└── README.md
+```
+
+O arquivo `contatos.txt` é utilizado para armazenar os dados e será criado durante a gravação, caso ainda não exista.
+
+## Organização das classes
+
+| Classe | Responsabilidade |
+|---|---|
+| `Principal` | Inicializar e conectar os componentes da aplicação. |
+| `Contato` | Representar os dados de um contato (Model). |
+| `AgendaView` | Controlar o menu, receber informações e apresentar resultados (View). |
+| `AgendaController` | Executar as operações do CRUD e coordenar a persistência (Controller). |
+| `ContatoDAO` | Realizar a leitura e gravação dos contatos em arquivo (DAO). |
+
+## V5.1.0 — MVC Completo
+
+Nesta versão, aprimoramos a implementação do padrão arquitetural **MVC (Model-View-Controller)**, introduzido na V5.0.0.
+
+Anteriormente, a classe `Principal` ainda controlava o menu e coordenava as chamadas entre a View e o Controller.
+
+Agora, centralizamos a interação com o usuário na classe `AgendaView`, mantendo o `AgendaController` responsável pelas operações do CRUD e o `ContatoDAO` pela persistência dos dados.
+
+Essa reorganização reduz as responsabilidades da classe `Principal` e aprimora a separação entre os componentes da aplicação.
+
+### Principais alterações
+
+- Transferência do controle do menu para `AgendaView`.
+- Integração entre View e Controller por meio do construtor.
+- Criação de métodos para executar as operações do CRUD na View.
+- Centralização da entrada de dados e apresentação de mensagens.
+- Transferência das funcionalidades de apresentação da classe `Uteis` para `AgendaView`.
+- Simplificação da classe `Principal`.
+- Refinamento dos métodos do Controller.
+- Reutilização do método de pesquisa nas operações de atualização e exclusão.
+- Remoção de métodos e classes que deixaram de ser utilizados.
+- Manutenção da persistência em arquivos TXT utilizando DAO.
+- Validação das operações e da separação de responsabilidades.
+
+### Organização MVC
+
+O padrão MVC divide a aplicação em três componentes principais:
+
+| Componente | Responsabilidade | Implementação |
+|---|---|---|
+| **Model** | Representar os dados da aplicação. | `Contato` |
+| **View** | Receber informações, controlar o menu e apresentar resultados. | `AgendaView` |
+| **Controller** | Executar as operações sobre os contatos. | `AgendaController` |
+
+A classe `ContatoDAO` complementa essa organização, sendo responsável pela persistência dos dados.
+
+### Exemplo de utilização
+
+A classe `Principal` é responsável por inicializar e conectar os componentes da aplicação.
+
+```java
+List<Contato> contatos = new ArrayList<>();
+
+ContatoDAO dao = new ContatoDAO("contatos.txt");
+dao.carregarContatos(contatos);
+
+AgendaController controller =
+        new AgendaController(contatos, dao);
+
+Scanner sc = new Scanner(System.in);
+
+AgendaView view = new AgendaView(sc, controller);
+
+view.iniciar();
+
+sc.close();
+```
+
+Observe que a classe `Principal` não precisa mais controlar o menu ou executar diretamente as operações do CRUD.
+
+A View recebe uma referência ao Controller por meio do construtor:
+
+```java
+public AgendaView(Scanner sc, AgendaController controller) {
+
+    this.sc = sc;
+    this.controller = controller;
+}
+```
+
+Essa associação permite que a View encaminhe as solicitações do usuário ao Controller.
+
+### Execução das operações
+
+Na V5.1.0, a classe `AgendaView` possui métodos responsáveis por organizar a interação necessária para cada operação.
+
+Exemplo de inclusão:
+
+```java
+public void executarInclusao() {
+
+    Contato contato = lerContato();
+
+    controller.adicionarContato(contato);
+
+    mostrarMensagem("Contato adicionado com sucesso!");
+}
+```
+
+A View recebe os dados, solicita a inclusão ao Controller e apresenta o resultado ao usuário.
+
+O Controller permanece responsável por modificar a coleção de contatos.
+
+### Controle do menu
+
+O controle do menu também passa a ser responsabilidade da classe `AgendaView`.
+
+```java
+public void iniciar() {
+
+    mostrarInicializacao();
+
+    int opcao;
+
+    do {
+
+        mostrarMenu();
+
+        opcao = selecionarOpcao();
+
+        switch (opcao) {
+
+            case 1 -> executarInclusao();
+
+            case 2 -> executarListagem();
+
+            case 3 -> executarPesquisa();
+
+            case 4 -> executarAtualizacao();
+
+            case 5 -> executarExclusao();
+
+            case 6 -> {
+                if (executarSaida()) {
+                    return;
+                }
+            }
+
+            case 7 -> mostrarSobre();
+
+            default -> mostrarMensagem("Opção inválida!");
+        }
+
+    } while (true);
+}
+```
+
+Dessa forma, a classe `Principal` apenas inicia a aplicação por meio de `view.iniciar()`.
+
+### Persistência dos dados
+
+A persistência continua sendo realizada pela classe `ContatoDAO`, utilizando o arquivo `contatos.txt` e o caractere `;` como separador.
+
+Exemplo:
+
+```text
+Maria;85999999999;maria@email.com
+João;85988888888;joao@email.com
+```
+
+Ao iniciar a aplicação, os contatos são carregados do arquivo para a coleção em memória.
+
+Ao selecionar a opção de saída, a View solicita ao Controller a gravação dos dados:
+
+```java
+boolean salvou = controller.salvarContatos();
+```
+
+O Controller encaminha a operação ao DAO:
+
+```java
+public boolean salvarContatos() {
+
+    return dao.salvarContatos(contatos);
+}
+```
+
+Caso ocorra um erro durante a gravação, a aplicação apresenta uma mensagem e permanece em execução.
+
+Assim, mantemos a separação entre interação com o usuário, operações do CRUD e persistência.
+
+## Histórico de versões
+
+| Versão | Descrição |
+|---|---|
+| **V0.0.0** | Introdução às variáveis e cadastro de um contato. |
+| **V0.1.0** | Utilização de arrays para armazenar contatos. |
+| **V0.2.0** | Introdução a `List` e `ArrayList`. |
+| **V0.3.0** | Implementação das operações do CRUD. |
+| **V1.0.0** | Modularização das funcionalidades em métodos. |
+| **V1.1.0** | Organização dos métodos em classes. |
+| **V1.1.1** | Correção do funcionamento da opção de saída. |
+| **V2.0.0** | Introdução à manipulação de arquivos. |
+| **V2.1.0** | Persistência dos contatos em arquivo TXT. |
+| **V3.0.0** | Introdução aos conceitos de classe e objeto. |
+| **V3.1.0** | Utilização de `ArrayList<Contato>`. |
+| **V3.2.0** | CRUD utilizando objetos. |
+| **V3.3.0** | Encapsulamento e aprimoramento da classe `Contato`. |
+| **V4.0.0** | Introdução ao padrão DAO e organização em pacotes. |
+| **V4.1.0** | DAO orientado a objetos, com construtor e métodos de instância. |
+| **V5.0.0** | Introdução ao padrão MVC e separação entre Model, View e Controller. |
+| **V5.1.0** | Consolidação do MVC, centralização das interações na View e simplificação da classe Principal. |
+
+## Conceitos trabalhados na V5.1.0
+
+- Padrão arquitetural MVC.
+- Separação de responsabilidades.
+- Princípio da responsabilidade única.
+- Baixo acoplamento.
+- Associação entre objetos.
+- Injeção de dependências por construtor.
+- Encapsulamento.
+- Compartilhamento de referências.
+- Reutilização de métodos.
+- Refatoração de código.
+- Organização da aplicação em camadas.
+- Integração entre MVC e DAO.
+- Persistência de objetos em arquivos.
+- Tratamento de exceções.
+- Testes de regressão.
+- Validação arquitetural.
+
+## Execução
+
+Para executar o projeto:
+
+1. Instalar o Java JDK.
+2. Abrir o projeto em uma IDE Java, como o Eclipse.
+3. Localizar a classe `Principal`, no pacote `br.edu.principal`.
+4. Executar o método `main()`.
+5. Utilizar o menu apresentado no terminal.
+
+Os contatos serão carregados automaticamente quando o arquivo de dados estiver disponível.
+
+## Próxima versão
+
+**V6.0.0 — JDBC + MySQL**
+
+Na próxima versão, vamos substituir a persistência em arquivos TXT por um banco de dados relacional **MySQL**, utilizando **JDBC (Java Database Connectivity)**.
+
+Vamos adaptar a classe `ContatoDAO` para realizar operações de leitura e gravação por meio de comandos SQL, preservando a organização MVC construída nas versões anteriores.
+
+Essa evolução permitirá demonstrar uma das principais vantagens da separação de responsabilidades: modificar a tecnologia de persistência sem precisar reescrever a interface ou a lógica de interação com o usuário.

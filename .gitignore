@@ -1,5 +1,13 @@
-.idea/
-out/
-*.iml
+# Java
+*.class
+
+# Eclipse
+bin/
+.metadata/
+.settings/
+
+# macOS
 .DS_Store
-Thumbs.db
+
+# Arquivos temporários
+*.log
