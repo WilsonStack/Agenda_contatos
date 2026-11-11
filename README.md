@@ -4,7 +4,7 @@ Aplicação desenvolvida em **Java** para gerenciamento de contatos, construída
 
 O projeto acompanha a evolução dos conceitos de programação, desde a utilização de variáveis e estruturas de dados até a aplicação de princípios de orientação a objetos, organização em camadas, persistência e interfaces gráficas.
 
-**Versão atual: V5.0.0 — Introdução ao Padrão MVC**
+**Versão atual: V5.1.0 — MVC Completo**
 
 ## Objetivo
 
@@ -53,10 +53,8 @@ AgendaContatos/
 │           │   └── AgendaView.java
 │           ├── controle/
 │           │   └── AgendaController.java
-│           ├── dao/
-│           │   └── ContatoDAO.java
-│           └── uteis/
-│               └── Uteis.java
+│           └── dao/
+│               └── ContatoDAO.java
 ├── contatos.txt
 └── README.md
 ```
@@ -67,32 +65,35 @@ O arquivo `contatos.txt` é utilizado para armazenar os dados e será criado dur
 
 | Classe | Responsabilidade |
 |---|---|
-| `Principal` | Inicializar os componentes e coordenar a execução da aplicação. |
+| `Principal` | Inicializar e conectar os componentes da aplicação. |
 | `Contato` | Representar os dados de um contato (Model). |
-| `AgendaView` | Receber informações do usuário e apresentar os resultados (View). |
-| `AgendaController` | Coordenar as operações do CRUD (Controller). |
+| `AgendaView` | Controlar o menu, receber informações e apresentar resultados (View). |
+| `AgendaController` | Executar as operações do CRUD e coordenar a persistência (Controller). |
 | `ContatoDAO` | Realizar a leitura e gravação dos contatos em arquivo (DAO). |
-| `Uteis` | Disponibilizar funcionalidades auxiliares da aplicação. |
 
-## V5.0.0 — Introdução ao Padrão MVC
+## V5.1.0 — MVC Completo
 
-Nesta versão, introduzimos o padrão arquitetural **MVC (Model-View-Controller)**, aprimorando a organização da aplicação por meio da separação entre apresentação, controle e manipulação dos dados.
+Nesta versão, aprimoramos a implementação do padrão arquitetural **MVC (Model-View-Controller)**, introduzido na V5.0.0.
 
-Na V4.1.0, utilizávamos o padrão DAO para separar a persistência dos dados das operações do CRUD. Entretanto, a classe `Agenda` ainda concentrava a interação com o usuário e a execução das operações.
+Anteriormente, a classe `Principal` ainda controlava o menu e coordenava as chamadas entre a View e o Controller.
 
-Agora, distribuímos essas responsabilidades entre os componentes MVC, mantendo as funcionalidades existentes e a persistência em arquivos.
+Agora, centralizamos a interação com o usuário na classe `AgendaView`, mantendo o `AgendaController` responsável pelas operações do CRUD e o `ContatoDAO` pela persistência dos dados.
+
+Essa reorganização reduz as responsabilidades da classe `Principal` e aprimora a separação entre os componentes da aplicação.
 
 ### Principais alterações
 
-- Criação do pacote `br.edu.visao` e da classe `AgendaView`.
-- Criação do pacote `br.edu.controle` e da classe `AgendaController`.
-- Separação entre entrada de dados, processamento das operações e apresentação dos resultados.
-- Adaptação das operações de inclusão, listagem, pesquisa, atualização e exclusão.
-- Reutilização dos métodos de pesquisa nas operações de atualização e exclusão.
-- Integração dos componentes MVC na classe `Principal`.
-- Remoção da classe `Agenda` após a migração de suas funcionalidades.
-- Manutenção da persistência em arquivos utilizando o padrão DAO.
-- Preservação da interface textual executada no terminal.
+- Transferência do controle do menu para `AgendaView`.
+- Integração entre View e Controller por meio do construtor.
+- Criação de métodos para executar as operações do CRUD na View.
+- Centralização da entrada de dados e apresentação de mensagens.
+- Transferência das funcionalidades de apresentação da classe `Uteis` para `AgendaView`.
+- Simplificação da classe `Principal`.
+- Refinamento dos métodos do Controller.
+- Reutilização do método de pesquisa nas operações de atualização e exclusão.
+- Remoção de métodos e classes que deixaram de ser utilizados.
+- Manutenção da persistência em arquivos TXT utilizando DAO.
+- Validação das operações e da separação de responsabilidades.
 
 ### Organização MVC
 
@@ -100,15 +101,15 @@ O padrão MVC divide a aplicação em três componentes principais:
 
 | Componente | Responsabilidade | Implementação |
 |---|---|---|
-| **Model** | Representar e gerenciar os dados. | `Contato` e acesso aos dados por `ContatoDAO`. |
-| **View** | Receber informações e apresentar resultados. | `AgendaView` |
-| **Controller** | Coordenar as operações solicitadas. | `AgendaController` |
+| **Model** | Representar os dados da aplicação. | `Contato` |
+| **View** | Receber informações, controlar o menu e apresentar resultados. | `AgendaView` |
+| **Controller** | Executar as operações sobre os contatos. | `AgendaController` |
 
-O DAO permanece responsável pela persistência dos contatos, complementando a organização MVC.
+A classe `ContatoDAO` complementa essa organização, sendo responsável pela persistência dos dados.
 
 ### Exemplo de utilização
 
-A classe `Principal` inicializa os componentes necessários para executar a aplicação:
+A classe `Principal` é responsável por inicializar e conectar os componentes da aplicação.
 
 ```java
 List<Contato> contatos = new ArrayList<>();
@@ -116,34 +117,98 @@ List<Contato> contatos = new ArrayList<>();
 ContatoDAO dao = new ContatoDAO("contatos.txt");
 dao.carregarContatos(contatos);
 
-Scanner sc = new Scanner(System.in);
-
-AgendaView view = new AgendaView(sc);
 AgendaController controller =
         new AgendaController(contatos, dao);
+
+Scanner sc = new Scanner(System.in);
+
+AgendaView view = new AgendaView(sc, controller);
+
+view.iniciar();
+
+sc.close();
 ```
 
-A inclusão de contatos passa a utilizar a seguinte sequência:
+Observe que a classe `Principal` não precisa mais controlar o menu ou executar diretamente as operações do CRUD.
+
+A View recebe uma referência ao Controller por meio do construtor:
 
 ```java
-Contato contato = view.lerContato();
+public AgendaView(Scanner sc, AgendaController controller) {
 
-controller.adicionarContato(contato);
-
-view.mostrarMensagem("Contato adicionado com sucesso!");
+    this.sc = sc;
+    this.controller = controller;
+}
 ```
 
-A View recebe as informações digitadas pelo usuário, enquanto o Controller realiza a inclusão do objeto na coleção.
+Essa associação permite que a View encaminhe as solicitações do usuário ao Controller.
 
-Na listagem, o Controller disponibiliza os contatos e a View apresenta os resultados:
+### Execução das operações
+
+Na V5.1.0, a classe `AgendaView` possui métodos responsáveis por organizar a interação necessária para cada operação.
+
+Exemplo de inclusão:
 
 ```java
-List<Contato> lista = controller.listarContatos();
+public void executarInclusao() {
 
-view.mostrarContatos(lista);
+    Contato contato = lerContato();
+
+    controller.adicionarContato(contato);
+
+    mostrarMensagem("Contato adicionado com sucesso!");
+}
 ```
 
-Dessa forma, a lógica de apresentação permanece separada das operações sobre os dados.
+A View recebe os dados, solicita a inclusão ao Controller e apresenta o resultado ao usuário.
+
+O Controller permanece responsável por modificar a coleção de contatos.
+
+### Controle do menu
+
+O controle do menu também passa a ser responsabilidade da classe `AgendaView`.
+
+```java
+public void iniciar() {
+
+    mostrarInicializacao();
+
+    int opcao;
+
+    do {
+
+        mostrarMenu();
+
+        opcao = selecionarOpcao();
+
+        switch (opcao) {
+
+            case 1 -> executarInclusao();
+
+            case 2 -> executarListagem();
+
+            case 3 -> executarPesquisa();
+
+            case 4 -> executarAtualizacao();
+
+            case 5 -> executarExclusao();
+
+            case 6 -> {
+                if (executarSaida()) {
+                    return;
+                }
+            }
+
+            case 7 -> mostrarSobre();
+
+            default -> mostrarMensagem("Opção inválida!");
+        }
+
+    } while (true);
+}
+```
+
+Dessa forma, a classe `Principal` apenas inicia a aplicação por meio de `view.iniciar()`.
 
 ### Persistência dos dados
 
@@ -158,13 +223,24 @@ João;85988888888;joao@email.com
 
 Ao iniciar a aplicação, os contatos são carregados do arquivo para a coleção em memória.
 
-Ao selecionar a opção de saída, o Controller solicita ao DAO a gravação dos dados:
+Ao selecionar a opção de saída, a View solicita ao Controller a gravação dos dados:
 
 ```java
 boolean salvou = controller.salvarContatos();
 ```
 
+O Controller encaminha a operação ao DAO:
+
+```java
+public boolean salvarContatos() {
+
+    return dao.salvarContatos(contatos);
+}
+```
+
 Caso ocorra um erro durante a gravação, a aplicação apresenta uma mensagem e permanece em execução.
+
+Assim, mantemos a separação entre interação com o usuário, operações do CRUD e persistência.
 
 ## Histórico de versões
 
@@ -186,22 +262,26 @@ Caso ocorra um erro durante a gravação, a aplicação apresenta uma mensagem e
 | **V4.0.0** | Introdução ao padrão DAO e organização em pacotes. |
 | **V4.1.0** | DAO orientado a objetos, com construtor e métodos de instância. |
 | **V5.0.0** | Introdução ao padrão MVC e separação entre Model, View e Controller. |
+| **V5.1.0** | Consolidação do MVC, centralização das interações na View e simplificação da classe Principal. |
 
-## Conceitos trabalhados na V5.0.0
+## Conceitos trabalhados na V5.1.0
 
 - Padrão arquitetural MVC.
 - Separação de responsabilidades.
-- Organização da aplicação em camadas.
-- Classes e objetos.
-- Encapsulamento.
-- Construtores.
+- Princípio da responsabilidade única.
+- Baixo acoplamento.
+- Associação entre objetos.
 - Injeção de dependências por construtor.
+- Encapsulamento.
 - Compartilhamento de referências.
-- Retorno de objetos e coleções.
 - Reutilização de métodos.
 - Refatoração de código.
+- Organização da aplicação em camadas.
 - Integração entre MVC e DAO.
 - Persistência de objetos em arquivos.
+- Tratamento de exceções.
+- Testes de regressão.
+- Validação arquitetural.
 
 ## Execução
 
@@ -217,8 +297,10 @@ Os contatos serão carregados automaticamente quando o arquivo de dados estiver 
 
 ## Próxima versão
 
-**V5.1.0 — MVC Completo**
+**V6.0.0 — JDBC + MySQL**
 
-Na próxima versão, vamos aprimorar a implementação do padrão MVC, reduzindo as responsabilidades ainda concentradas na classe `Principal` e transferindo as interações restantes da classe `Uteis` para a View.
+Na próxima versão, vamos substituir a persistência em arquivos TXT por um banco de dados relacional **MySQL**, utilizando **JDBC (Java Database Connectivity)**.
 
-O objetivo será consolidar a separação entre os componentes, simplificando a inicialização da aplicação e preparando sua arquitetura para futuras interfaces gráficas.
+Vamos adaptar a classe `ContatoDAO` para realizar operações de leitura e gravação por meio de comandos SQL, preservando a organização MVC construída nas versões anteriores.
+
+Essa evolução permitirá demonstrar uma das principais vantagens da separação de responsabilidades: modificar a tecnologia de persistência sem precisar reescrever a interface ou a lógica de interação com o usuário.
